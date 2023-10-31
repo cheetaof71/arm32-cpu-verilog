@@ -2,10 +2,10 @@ module reg_file (
 	input wire clk,
 	input wire reset,
 	input wire reg_write_enable,
-	input wire [4:0] write_reg_sel,
+	input wire [3:0] write_reg_sel,
 	input wire [31:0] write_reg_data,
-	input wire [4:0] read_reg_sel1,
-	input wire [4:0] read_reg_sel2,
+	input wire [3:0] read_reg_sel1,
+	input wire [3:0] read_reg_sel2,
 	output wire [31:0] read_reg_data1,
 	output wire [31:0] read_reg_data2
 );
@@ -16,9 +16,6 @@ initial begin
 	for (i = 0; i < 16; i = i + 1) begin
 		reg_file[i] <= 32'b0;
 	end
-	reg_file[0] <= 10;
-	reg_file[1] <= 11;
-	reg_file[2] <= 12;
 end
 
 always @(posedge reset) begin
