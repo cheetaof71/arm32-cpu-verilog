@@ -36,7 +36,7 @@ ARM 32 bit ISA
     Instructions[27:26] = 01
     Instructions[25] = Imidiate NOT
     Instructions[19:16] = Ra
-    Instructions[27:26] = Rd
+    Instructions[15:12] = Rd
 
     Imidiate Mode:
         Instructions[11:0] = Imidiate value 12 bit
@@ -62,6 +62,4 @@ ARM 32 bit ISA
 
         Instruction: b -3
         Machine Code: 32'b1110_10_10_1111_1111_1111_1111_1111_1100
-
-
 
