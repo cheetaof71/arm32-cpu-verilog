@@ -1,5 +1,8 @@
 module control_unit (
     input wire [31:0] instruction,
+    input wire zero,
+    input wire lt,
+    input wire gt,
     output reg [3:0] alu_op,
     output reg [3:0] write_reg_sel,
     output reg reg_write_enable,

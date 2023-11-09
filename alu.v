@@ -3,7 +3,9 @@ module alu (
     input wire [31:0] op2,
     input wire [3:0] alu_op,
     output reg [31:0] result,
-    output reg zero
+    output reg zero,
+    output reg lt,
+    output reg gt,
 );
 
   always @* begin
@@ -17,6 +19,8 @@ module alu (
       default: result = 32'b0;
     endcase
     zero = (result == 32'b0);
+    lt = (op1 < op2);
+    gt = (op1 > op2);
   end
 
 endmodule

@@ -1,0 +1,67 @@
+ARM 32 bit ISA
+
+1. Data Processing Instructions
+
+    Instructions[27:26] = 00
+    Instructions[25] = Imidiate
+    Instructions[21:24] = ALU OP
+    Instructions[19:16] = Ra
+    Instructions[27:26] = Rd
+
+    Imidiate Mode:
+        Instructions[7:0] = Imidiate value 8 bit
+
+    Register Mode:
+        Instructions[3:0] = Rb
+
+    ALU OP:
+        0000 &  AND
+        0001 ^  XOR
+        0010 -  SUB
+        0100 +  ADD
+        1010 -  CMP
+        1100 |  ORR
+
+    Example:
+
+        Imidiate Mode: add r0, r0, #10
+        Machine Code: 32'b1110_00_1_0100_0_0000_0000_0000_00001010
+
+        Register Mode: add r0, r0, r1
+        Machine Code:  32'b1110_00_0_0100_0_0000_0000_00000000_0001
+
+
+2. Memory Instructions
+
+    Instructions[27:26] = 01
+    Instructions[25] = Imidiate NOT
+    Instructions[19:16] = Ra
+    Instructions[27:26] = Rd
+
+    Imidiate Mode:
+        Instructions[11:0] = Imidiate value 12 bit
+
+    Register Mode:
+        Instructions[3:0] = Rb
+
+    Example:
+
+        Imidiate Mode: ldr r0, #12
+        Machine Code: 32'b1110_01_0_0000_1_0010_0000_00000000_1100
+
+        Register Mode: ldr r0, [r5]
+        Machine Code: 32'b1110_01_1_0000_1_0101_0000_10101010_0000
+
+
+3. Branch Instructions
+
+    Instructions[27:26] = 10
+    Instructions[23:0] = Jump Address 2's Complement format
+
+    Example:
+
+        Instruction: b -3
+        Machine Code: 32'b1110_10_10_1111_1111_1111_1111_1111_1100
+
+
+
