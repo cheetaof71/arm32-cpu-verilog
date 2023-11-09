@@ -4,9 +4,9 @@ ARM 32 bit ISA
 
     Instructions[27:26] = 00
     Instructions[25] = Imidiate
-    Instructions[21:24] = ALU OP
+    Instructions[24:21] = ALU OP
     Instructions[19:16] = Ra
-    Instructions[27:26] = Rd
+    Instructions[15:12] = Rd
 
     Imidiate Mode:
         Instructions[7:0] = Imidiate value 8 bit
