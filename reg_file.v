@@ -19,7 +19,7 @@ initial begin
 end
 
 always @(posedge reset) begin
-	for (i = 0; i < 32; i = i + 1) begin
+	for (i = 0; i < 16; i = i + 1) begin
 		reg_file[i] <= 32'b0;
 	end
 end
