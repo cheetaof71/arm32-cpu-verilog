@@ -5,7 +5,7 @@ module alu (
     output reg [31:0] result,
     output reg zero,
     output reg lt,
-    output reg gt,
+    output reg gt
 );
 
   always @* begin
@@ -19,8 +19,8 @@ module alu (
       default: result = 32'b0;
     endcase
     zero = (result == 32'b0);
-    lt = (op1 < op2);
-    gt = (op1 > op2);
+    lt   = (op1 < op2);
+    gt   = (op1 > op2);
   end
 
 endmodule

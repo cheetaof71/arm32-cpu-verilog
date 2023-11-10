@@ -5,8 +5,10 @@ module memory (
     input wire [31:0] write_data,
     input wire [31:0] read_addr1,
     input wire [31:0] read_addr2,
+    input wire [39:0] dht_data_in,
     output wire [31:0] read_data1,
-    output wire [31:0] read_data2
+    output wire [31:0] read_data2,
+    output wire [3:0] ssd_data_out
 );
 
   reg [31:0] mem[0:1023];
@@ -45,7 +47,12 @@ module memory (
     end
   end
 
+  always @(dht_data_in) begin
+    mem[1001] <= {12'b0, dht_data_in};
+  end
+
   assign read_data1 = mem[read_addr1];
   assign read_data2 = mem[read_addr2];
+  assign ssd_data_out = mem[1000][3:0];
 
 endmodule
