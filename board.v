@@ -57,8 +57,8 @@ module board (
   );
 
   initial begin
-    $dumpfile("simulation.vcd");
-    $dumpvars(0, board);
+    // $dumpfile("simulation.vcd");
+    // $dumpvars(0, board);
     // $monitor("time = %3d addr = 0x%h, instruction = 0x%h",$time, addr, instruction);
     #245000 $finish;
   end
