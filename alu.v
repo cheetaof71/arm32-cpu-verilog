@@ -2,6 +2,7 @@ module alu (
     input wire [31:0] op1,
     input wire [31:0] op2,
     input wire [3:0] alu_op,
+    input wire [1:0] sh,
     output reg [31:0] result,
     output reg zero,
     output reg lt,
@@ -16,6 +17,12 @@ module alu (
       4'b0100: result = op1 + op2;  // ADD
       4'b1010: result = op1 - op2;  // CMP
       4'b1100: result = op1 | op2;  // ORR
+      4'b1101: begin
+        case(sh)
+        2'b00: result = op1 << op2; // LSL
+        2'b01: result = op1 >> op2; // LSR
+        endcase
+      end
       default: result = 32'b0;
     endcase
     zero = (result == 32'b0);

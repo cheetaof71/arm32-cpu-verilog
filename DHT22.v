@@ -2,7 +2,7 @@ module DHT22 (
     input wire clk,
     input wire rst,
     inout wire dht_pin,
-    output reg [39:0] dht_data
+    output reg [31:0] dht_data
 );
   reg pin_buf;
   reg flag;
@@ -14,13 +14,13 @@ module DHT22 (
 
   assign dht_pin = (state == REQUEST) ? pin_buf : 1'bz;
 
-  parameter IDLE = 3'b000, REQUEST = 3'b001, RESPONSE = 3'b010, READ_DATA = 3'b011, NOP = 3'b100;
+  reg IDLE = 3'b000, REQUEST = 3'b001, RESPONSE = 3'b010, READ_DATA = 3'b011;
 
   always @(rst) begin
     state <= IDLE;
     bit_count <= 6'b0;
     shift_reg <= 40'b0;
-    timer <= 32'd100_000;
+    timer <= 32'd1_000_000;
     dht_data <= 40'b0;
     pin_buf <= 1;
   end
@@ -45,7 +45,7 @@ module DHT22 (
           timer <= timer - 1;
         end else begin
           pin_buf <= 0;
-          timer <= timer - 1;
+          timer   <= timer - 1;
         end
       end
       RESPONSE: begin
@@ -59,8 +59,9 @@ module DHT22 (
       end
       READ_DATA: begin
         if (bit_count == 6'b101000) begin
-          dht_data  <= shift_reg;
-          state <= NOP;
+          dht_data <= shift_reg[39:7];
+          timer <= 32'd5_000_000;
+          state <= IDLE;
         end
         if (dht_pin != flag && !hg) begin
           hg   <= 1'b1;
@@ -82,9 +83,6 @@ module DHT22 (
             timer <= 32'b0;
           end
         end
-      end
-      NOP: begin
-        // 
       end
     endcase
   end

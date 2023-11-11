@@ -4,6 +4,7 @@ module control_unit (
     input wire lt,
     input wire gt,
     output reg [3:0] alu_op,
+    output reg [1:0] sh,
     output reg [3:0] write_reg_sel,
     output reg reg_write_enable,
     output reg [3:0] read_reg_sel1,
@@ -23,6 +24,7 @@ module control_unit (
   always @* begin
 
     alu_op = 4'bx;
+    sh = 2'bx;
     write_reg_sel = 1'bx;
     reg_write_enable = 1'b0;
     read_reg_sel1 = 4'bx;
@@ -40,6 +42,7 @@ module control_unit (
     case (instruction[27:26])
       2'b00: begin  // ALU OPS
         alu_op = instruction[24:21];
+        sh = instruction[6:5];
         reg_write_enable = 1'b1;
         read_reg_sel1 = instruction[19:16];
         write_reg_sel = instruction[15:12];

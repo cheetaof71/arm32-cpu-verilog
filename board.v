@@ -14,7 +14,7 @@ module board (
   wire mem_write_enable;
 
   wire [3:0] ssd_data;
-  wire [39:0] dht_data;
+  wire [31:0] dht_data;
 
   clk clk_ins (.clk(clk));
   reset reset_ins (.reset(reset));
@@ -60,7 +60,7 @@ module board (
     $dumpfile("simulation.vcd");
     $dumpvars(0, board);
     // $monitor("time = %3d addr = 0x%h, instruction = 0x%h",$time, addr, instruction);
-    #100 $finish;
+    #245000 $finish;
   end
 
 

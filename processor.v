@@ -13,6 +13,7 @@ module processor (
   wire jump_en;
   wire [31:0] jump_addr;
   wire [3:0] alu_op;
+  wire [1:0] sh;
   wire [3:0] write_reg_sel;
   wire reg_write_enable;
   wire [3:0] read_reg_sel1;
@@ -45,6 +46,7 @@ module processor (
   control_unit control_unit_ins (
       .instruction(instruction),
       .alu_op(alu_op),
+      .sh(sh),
       .write_reg_sel(write_reg_sel),
       .reg_write_enable(reg_write_enable),
       .read_reg_sel1(read_reg_sel1),
@@ -76,6 +78,7 @@ module processor (
       .op1(read_reg_data1),
       .op2(immidiate ? immidiate_val : read_reg_data2),
       .alu_op(alu_op),
+      .sh(sh),
       .result(result),
       .zero(zero)
   );
